@@ -50,36 +50,36 @@ import com.finemanagement.service.production.SysTaskService;
  * @author liutianyang
  */
 @Controller
-@RequestMapping(value="/appBase")
+@RequestMapping(value = "/appBase")
 public class AppBaseController extends BaseAction {
-	
+
 	private final static Logger log = Logger.getLogger(AppBaseController.class);
 
 	@Autowired(required = false)
 	private SysBaseService<SysBase> sysBaseService;
-	
+
 	@Autowired(required = false)
 	private SysClassifyService<SysClassify> sysClassifyService;
-	
+
 	@Autowired(required = false)
 	private SysWarehouseService<SysWarehouse> sysWarehouseService;
-	
+
 	@Autowired(required = false)
 	private SysProductService<SysProduct> sysProductService;
-	
+
 	@Autowired(required = false)
 	private SysGreenhouseService<SysGreenhouse> sysGreenhouseService;
-	
+
 	@Autowired(required = false)
 	private SysGreenhouseTypeService<SysGreenhouseType> sysGreenhouseTypeService;
-	
+
 	@Autowired(required = false)
 	private SysTaskService<SysTask> sysTaskService;
-	
+
 	@Autowired(required = false)
 	private SysEmployeesService<SysEmployees> sysEmployeesService;
-	
-	@RequestMapping("/appQuerybaseList") 
+
+	@RequestMapping("/appQuerybaseList")
 	public void appQuerybaseList(SysBaseModel model, HttpServletResponse rep) {
 		try {
 			super.indiModel(model);
@@ -102,8 +102,8 @@ public class AppBaseController extends BaseAction {
 			sendAppFailure(rep, "查询基地异常!");
 		}
 	}
-	
-	@RequestMapping("/appQueryGreenhouseList") 
+
+	@RequestMapping("/appQueryGreenhouseList")
 	public void appQueryGreenhouseList(SysGreenhouseModel model, HttpServletResponse rep) {
 		try {
 			List<SysGreenhouse> dataList = sysGreenhouseService.queryByList(model);
@@ -125,14 +125,15 @@ public class AppBaseController extends BaseAction {
 			sendAppFailure(rep, "查询大棚异常!");
 		}
 	}
-	
+
 	/**
 	 * json 列表页面
+	 * 
 	 * @param model
 	 * @param response
 	 * @throws Exception
 	 */
-	@RequestMapping("/appQueryGHTypeList") 
+	@RequestMapping("/appQueryGHTypeList")
 	public void appQueryGHTypeList(SysGreenhouseTypeModel model, HttpServletRequest req, HttpServletResponse rep) {
 		try {
 			List<SysGreenhouseType> dataList = sysGreenhouseTypeService.queryByList(model);
@@ -150,8 +151,8 @@ public class AppBaseController extends BaseAction {
 			sendAppFailure(rep, "查询大棚类型异常!");
 		}
 	}
-	
-	@RequestMapping("/appQueryTaskTypeList") 
+
+	@RequestMapping("/appQueryTaskTypeList")
 	public void appQueryTaskTypeList(SysTaskModel model, HttpServletRequest req, HttpServletResponse rep) {
 		try {
 			super.indiModel(model);
@@ -169,8 +170,8 @@ public class AppBaseController extends BaseAction {
 			sendAppFailure(rep, "查询任务类型异常!");
 		}
 	}
-	
-	@RequestMapping("/appQueryProductList") 
+
+	@RequestMapping("/appQueryProductList")
 	public void appQueryProductList(SysProductModel model, HttpServletResponse rep) {
 		try {
 			super.indiModel(model);
@@ -194,14 +195,15 @@ public class AppBaseController extends BaseAction {
 			sendAppFailure(rep, "查询投入品异常!");
 		}
 	}
-	
+
 	/**
 	 * ilook 首页
+	 * 
 	 * @param model
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/appQueryClassifyList") 
+	@RequestMapping("/appQueryClassifyList")
 	public void appQueryClassifyList(SysClassifyModel model, HttpServletResponse rep) {
 		try {
 			List<SysClassify> dataList = sysClassifyService.queryByList(model);
@@ -211,14 +213,15 @@ public class AppBaseController extends BaseAction {
 			sendAppFailure(rep, "查询商品类型异常!");
 		}
 	}
-	
+
 	/**
 	 * ilook 首页
+	 * 
 	 * @param model
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/appQueryWhList") 
+	@RequestMapping("/appQueryWhList")
 	public void appQueryWhList(SysWarehouseModel model, HttpServletResponse rep) {
 		try {
 			List<SysWarehouse> dataList = sysWarehouseService.queryByList(model);
@@ -228,8 +231,8 @@ public class AppBaseController extends BaseAction {
 			sendAppFailure(rep, "查询仓库异常!");
 		}
 	}
-	
-	@RequestMapping("/appQueryEmployeeList") 
+
+	@RequestMapping("/appQueryEmployeeList")
 	public void appQueryEmployeeList(SysEmployeesModel model, HttpServletResponse rep) throws Exception {
 		try {
 			super.indiModel(model);
@@ -237,7 +240,9 @@ public class AppBaseController extends BaseAction {
 			log.debug("APP查询员工信息成功!");
 			sendAppSuccess(rep, dataList);
 		} catch (Exception e) {
+			log.error(e.toString());
 			sendAppFailure(rep, "查询员工信息异常!");
+			e.printStackTrace();
 		}
 	}
 }
